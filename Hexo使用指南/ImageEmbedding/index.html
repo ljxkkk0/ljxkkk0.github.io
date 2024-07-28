@@ -19,24 +19,28 @@
   <meta name="author" content="ljx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="网站配置 配置_config.yml_,下面仅对常用配置作介绍，完整配置参考官方文档1 Site     字段 描述     title 网站标题   subtitle 副标题   description 描述   keywords 关键词   author 作者   language 语言。使用 2 个字母的 ISO-639-1">
+    <meta name="description" content="本地资源引用问题（以图片为例） 方法说明 借助hexo-renderer-marked渲染器 hexo-renderer-marked 3.1.01 引入了一个新选项，允许在 markdown 中嵌入图片而不使用标签插件。需配置： 12345_config.ymlpost_asset_folder: truemarked:  prependRoot: true  postAsset:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="配置">
-<meta property="og:url" content="https://ljxkkk0.github.io/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="ImageEmbedding">
+<meta property="og:url" content="https://ljxkkk0.github.io/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/ImageEmbedding/index.html">
 <meta property="og:site_name" content="Jason&#39;s Blog">
-<meta property="og:description" content="网站配置 配置_config.yml_,下面仅对常用配置作介绍，完整配置参考官方文档1 Site     字段 描述     title 网站标题   subtitle 副标题   description 描述   keywords 关键词   author 作者   language 语言。使用 2 个字母的 ISO-639-1">
+<meta property="og:description" content="本地资源引用问题（以图片为例） 方法说明 借助hexo-renderer-marked渲染器 hexo-renderer-marked 3.1.01 引入了一个新选项，允许在 markdown 中嵌入图片而不使用标签插件。需配置： 12345_config.ymlpost_asset_folder: truemarked:  prependRoot: true  postAsset:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-26T07:10:07.000Z">
-<meta property="article:modified_time" content="2024-07-28T11:01:26.337Z">
+<meta property="og:image" content="https://ljxkkk0.github.io/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/ImageEmbedding/image.jpg=100x81">
+<meta property="og:image" content="https://ljxkkk0.github.io/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/ImageEmbedding/img/image.jpg=100x81">
+<meta property="og:image" content="https://ljxkkk0.github.io/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/ImageEmbedding/img/image.jpg">
+<meta property="article:published_time" content="2024-07-28T12:22:30.000Z">
+<meta property="article:modified_time" content="2024-07-28T13:11:59.893Z">
 <meta property="article:author" content="ljx">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ljxkkk0.github.io/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/ImageEmbedding/image.jpg=100x81">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>配置 - Jason&#39;s Blog</title>
+  <title>ImageEmbedding - Jason&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="配置"></span>
+            <span id="subtitle" data-typed-text="ImageEmbedding"></span>
           
         </div>
 
@@ -212,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-26 15:10" pubdate>
-          2024年7月26日 下午
+        <time datetime="2024-07-28 20:22" pubdate>
+          2024年7月28日 晚上
         </time>
       </span>
     
@@ -224,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          914 字
+          156 字
         
       </span>
     
@@ -285,180 +289,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">配置</h1>
+            <h1 id="seo-header">ImageEmbedding</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="网站配置">网站配置</h2>
-<p>配置<code>_config.yml_</code>,下面仅对常用配置作介绍，完整配置参考<a
-target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方文档</a><a
-href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a></p>
-<h3 id="site">Site</h3>
-<table>
-
-<thead>
-<tr>
-<th>字段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>title</code></td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td><code>subtitle</code></td>
-<td>副标题</td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>描述</td>
-</tr>
-<tr>
-<td><code>keywords</code></td>
-<td>关键词</td>
-</tr>
-<tr>
-<td><code>author</code></td>
-<td>作者</td>
-</tr>
-<tr>
-<td><code>language</code></td>
-<td>语言。使用 2 个字母的 ISO-639-1 代码，或 它的变体。 默认为 en。</td>
-</tr>
-<tr>
-<td><code>timezone</code></td>
-<td>网站时区。 Hexo 默认使用您电脑的时区。 请参考时区列表进行设置，如
-America/New_York, Japan, 和 UTC 。 一般的，对于中国大陆地区可以使用
-Asia/Shanghai。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="url">URL</h3>
-<table>
-
-<thead>
-<tr>
-<th>字段</th>
-<th>描述</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>url</code></td>
-<td>网站对应的url，需以<code>http://</code>或是<code>https://</code>开头</td>
-<td></td>
-</tr>
-<tr>
-<td><code>root</code></td>
-<td>网站根目录。 如果您的网站存放在子目录中，例如
-<code>http://example.com/blog</code> ，则请将您的 <code>url</code> 设为
-<code>http://example.com/blog</code> 并把 <code>root</code> 设为
-<code>/blog/</code> 。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>permalink</code></td>
-<td>文章的 永久链接 格式</td>
-<td><code>:year/:month/:day/:title/</code></td>
-</tr>
-<tr>
-<td><code>permalink_defaults</code></td>
-<td>永久链接中各部分的默认值</td>
-<td></td>
-</tr>
-<tr>
-<td><code>pretty_urls</code></td>
-<td>改写 permalink 的值来美化 URL</td>
-<td></td>
-</tr>
-<tr>
-<td><code>pretty_urls.trailing_index</code></td>
-<td>是否在永久链接中保留尾部的 index.html，设置为 false 时去除</td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>pretty_urls.trailing_html</code></td>
-<td>是否在永久链接中保留尾部的 .html, 设置为 <code>false</code> 时去除
-(对尾部的 <code>index.html</code>无效</td>
-<td><code>true</code></td>
-</tr>
-</tbody>
-</table>
-<p>示例：</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-meta"># e.g. page.permalink is http:<span class="hljs-comment">//example.com/foo/bar/index.html  </span></span><br><span class="hljs-symbol">pretty_urls:</span>  <br><span class="hljs-symbol">  trailing_index:</span> false   <br><span class="hljs-meta"># becomes http:<span class="hljs-comment">//example.com/foo/bar/   </span></span><br></code></pre></td></tr></table></figure>
-<h3 id="directory">Directory</h3>
-<table>
-
-<thead>
-<tr>
-<th>字段</th>
-<th>描述</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>source_dir</code></td>
-<td>源文件夹，内容存储位置</td>
-<td><code>source</code></td>
-</tr>
-<tr>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<td><code>skip_render</code></td>
-<td>匹配到的文件将会被不做改动地复制到<code>public</code>目录中。可使用glob表达式来匹配路径，避免一些不需要渲染的文件被渲染。</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>示例：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">skip_render: &quot;mypage/**/*&quot;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">将会直接将 `<span class="hljs-built_in">source</span>/mypage/index.html` 和 `<span class="hljs-built_in">source</span>/mypage/code.js` 不做改动地输出到 <span class="hljs-string">&#x27;public&#x27;</span> 目录</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">你也可以用这种方法来跳过对指定文章文件的渲染</span><br>skip_render: &quot;_posts/test-post.md&quot;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">这将会忽略对 <span class="hljs-string">&#x27;test-post.md&#x27;</span> 的渲染</span><br></code></pre></td></tr></table></figure>
-<h3 id="extension">Extension</h3>
-<table>
-
-<thead>
-<tr>
-<th>字段名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>theme</code></td>
-<td>当前主题名称。 值为<code>false</code>时禁用主题</td>
-</tr>
-<tr>
-<td><code>theme_config</code></td>
-<td>主题的配置文件，在这里放置的配置会覆盖主题目录下的<code>_config.yml</code>中的配置</td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td>部署部分的设置</td>
-</tr>
-</tbody>
-</table>
-<h3 id="includeexclude">Include&amp;Exclude</h3>
-<p>使用以下选项可明确处理或忽略某些文件/文件夹。 可以使用 glob
-表达式进行路径匹配。<br />
-<code>include</code> 和 <code>exclude</code> 选项只会应用到
-<code>source/</code> ，而 <code>ignore</code>
-选项会应用到所有文件夹。</p>
-<p>示例：</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs clean"># 处理或不处理目录或文件<br>include:<br>  - <span class="hljs-string">&quot;.nojekyll&quot;</span><br>  # 处理 <span class="hljs-string">&#x27;source/css/_typing.css&#x27;</span><br>  - <span class="hljs-string">&quot;css/_typing.css&quot;</span><br>  # 处理 <span class="hljs-string">&#x27;source/_css/&#x27;</span> 中的任何文件，但不包括子目录及其其中的文件。<br>  - <span class="hljs-string">&quot;_css/*&quot;</span><br>  # 处理 <span class="hljs-string">&#x27;source/_css/&#x27;</span> 中的任何文件和子目录下的任何文件。<br>  - <span class="hljs-string">&quot;_css/**/*&quot;</span><br><br>exclude:<br>  # 不处理 <span class="hljs-string">&#x27;source/js/test.js&#x27;</span>。<br>  - <span class="hljs-string">&quot;js/test.js&quot;</span><br>  # 不处理 <span class="hljs-string">&#x27;source/js/&#x27;</span> 中的文件、但包括子目录下的所有目录和文件。<br>  - <span class="hljs-string">&quot;js/*&quot;</span><br>  # 不处理 <span class="hljs-string">&#x27;source/js/&#x27;</span> 中的文件和子目录下的任何文件。<br>  - <span class="hljs-string">&quot;js/**/*&quot;</span><br>  # 不处理 <span class="hljs-string">&#x27;source/js/&#x27;</span> 目录下的所有文件名以 <span class="hljs-string">&#x27;test&#x27;</span> 开头的文件，但包括其它文件和子目录下的单文件。<br>  - <span class="hljs-string">&quot;js/test*&quot;</span><br>  # 不处理 <span class="hljs-string">&#x27;source/js/&#x27;</span> 及其子目录中任何以 <span class="hljs-string">&#x27;test&#x27;</span> 开头的文件。<br>  - <span class="hljs-string">&quot;js/**/test*&quot;</span><br>  # 不要用 exclude 来忽略 <span class="hljs-string">&#x27;source/_posts/&#x27;</span> 中的文件。<br>  # 你应该使用 <span class="hljs-string">&#x27;skip_render&#x27;</span>。 或者在要忽略的文件的文件名之前加一个下划线 <span class="hljs-string">&#x27;_&#x27;</span>。<br>  # - <span class="hljs-string">&quot;_posts/hello-world.md&quot;</span> # 在这里配置是没有用的。<br><br>ignore:<br>  # 忽略任何一个名叫 <span class="hljs-string">&#x27;foo&#x27;</span> 的文件夹。<br>  - <span class="hljs-string">&quot;**/foo&quot;</span><br>  # 只忽略 <span class="hljs-string">&#x27;themes/&#x27;</span> 下的 <span class="hljs-string">&#x27;foo&#x27;</span> 文件夹。<br>  - <span class="hljs-string">&quot;**/themes/*/foo&quot;</span><br>  # 对 <span class="hljs-string">&#x27;themes/&#x27;</span> 目录下的每个文件夹中忽略名叫 <span class="hljs-string">&#x27;foo&#x27;</span> 的子文件夹。<br>  - <span class="hljs-string">&quot;**/themes/**/foo&quot;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="本地资源引用问题以图片为例">本地资源引用问题（以图片为例）</h2>
+<h3 id="方法说明">方法说明</h3>
+<h4
+id="借助hexo-renderer-marked渲染器">借助hexo-renderer-marked渲染器</h4>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked
+3.1.0</a><a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a> 引入了一个新选项，允许在 markdown
+中嵌入图片而不使用标签插件。需配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">_config.yml</span><br><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<p>启用后，使用<code>hexo new post ImageEmbedding</code>创建文章时，会在<code>source/_posts</code>目录下自动生成目录同名目录<code>ImageEmbedding</code>。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs less">├── <span class="hljs-selector-tag">source</span><br>|<br>└── <span class="hljs-selector-tag">_posts</span><br>    ├── <span class="hljs-selector-tag">ImageEmbedding</span><span class="hljs-selector-class">.md</span><br>    └── <span class="hljs-selector-tag">ImageEmbedding</span><br>        └── <span class="hljs-selector-tag">image</span><span class="hljs-selector-class">.jpg</span><br><br></code></pre></td></tr></table></figure>
+<p>若<code>image.jpg</code>是帖子<code>ImageEmbedding</code>的资源图像且位于<code>/source/_posts/ImageEmbedding/image.jpg</code>，则可以在<code>name.md</code>文档中采用如下方式直接引用：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-selector-tag">image</span><span class="hljs-selector-class">.jpg</span>)<br></code></pre></td></tr></table></figure>
+<p><img src="image.jpg=100x81" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="img/image.jpg=100x81" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="使用html标签引用">使用html标签引用</h4>
+<p><img src="img/image.jpg" srcset="/img/loading.gif" lazyload width="100"></p>
 <h3 id="参考链接">参考链接</h3>
 <section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>https://hexo.io/zh-cn/docs/configuration<a
+<li id="fn1"><p>https://github.com/hexojs/hexo-renderer-marked<a
 href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
@@ -507,8 +366,8 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>配置</div>
-      <div>https://ljxkkk0.github.io/Hexo使用指南/配置/</div>
+      <div>ImageEmbedding</div>
+      <div>https://ljxkkk0.github.io/Hexo使用指南/ImageEmbedding/</div>
     </div>
     <div class="license-meta">
       
@@ -520,7 +379,7 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月26日</div>
+          <div>2024年7月28日</div>
         </div>
       
       
@@ -552,15 +411,15 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" title="常用指令">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">常用指令</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E5%8C%96/" title="初始化">
+                        <span class="hidden-mobile">初始化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -620,7 +479,7 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       
         <a href="/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E9%85%8D%E7%BD%AE/" title="配置"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">配置</span>
         </a>
       
@@ -638,7 +497,7 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       
         <a href="/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/ImageEmbedding/" title="ImageEmbedding"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">ImageEmbedding</span>
         </a>
       
