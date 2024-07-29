@@ -19,25 +19,27 @@
   <meta name="author" content="ljx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Python脚本集合  本文主要记录一些笔者使用到的有趣&#x2F;实用的脚本，具体见右侧各子页。">
+    <meta name="description" content="某大专GPA计算小脚本 1. GPA计算规则   GPA计算详细规则  2. Python脚本 安装依赖包 该脚本有简单的GUI界面，需要使用到python的GUI库tkinter。 测试是否有该依赖库。使用终端运行python后引入包tkinter，不报错，即可，如下：  若出现报错信息，则手动安装即可pip install tk：  源代码 123456789101">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python实用小脚本集合">
-<meta property="og:url" content="https://ljxkkk0.github.io/Bolgs/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC%E9%9B%86%E5%90%88/index.html">
+<meta property="og:title" content="GPACalculating">
+<meta property="og:url" content="https://ljxkkk0.github.io/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/index.html">
 <meta property="og:site_name" content="Jason&#39;s Blog">
-<meta property="og:description" content="Python脚本集合  本文主要记录一些笔者使用到的有趣&#x2F;实用的脚本，具体见右侧各子页。">
+<meta property="og:description" content="某大专GPA计算小脚本 1. GPA计算规则   GPA计算详细规则  2. Python脚本 安装依赖包 该脚本有简单的GUI界面，需要使用到python的GUI库tkinter。 测试是否有该依赖库。使用终端运行python后引入包tkinter，不报错，即可，如下：  若出现报错信息，则手动安装即可pip install tk：  源代码 123456789101">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ljxkkk0.github.io/Bolgs/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC%E9%9B%86%E5%90%88/Dog.gif">
-<meta property="article:published_time" content="2024-07-29T07:56:27.000Z">
-<meta property="article:modified_time" content="2024-07-29T14:13:37.953Z">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/GPA.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/2.png">
+<meta property="article:published_time" content="2024-07-29T12:56:18.000Z">
+<meta property="article:modified_time" content="2024-07-29T14:21:04.754Z">
 <meta property="article:author" content="ljx">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ljxkkk0.github.io/Bolgs/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC%E9%9B%86%E5%90%88/Dog.gif">
+<meta name="twitter:image" content="https://ljxkkk0.github.io/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/GPA.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Python实用小脚本集合 - Jason&#39;s Blog</title>
+  <title>GPACalculating - Jason&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Python实用小脚本集合"></span>
+            <span id="subtitle" data-typed-text="GPACalculating"></span>
           
         </div>
 
@@ -213,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-29 15:56" pubdate>
-          2024年7月29日 下午
+        <time datetime="2024-07-29 20:56" pubdate>
+          2024年7月29日 晚上
         </time>
       </span>
     
@@ -225,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          34 字
+          570 字
         
       </span>
     
@@ -286,19 +288,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Python实用小脚本集合</h1>
+            <h1 id="seo-header">GPACalculating</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="python脚本集合">Python脚本集合</h2>
-<div style="text-align: center;">
-<p>本文主要记录一些笔者使用到的有趣/实用的脚本，具体见右侧各子页。</p>
-</div>
-<p><img 
-src="https://ljxkkk0.github.io/Bolgs/Python实用小脚本/Python实用小脚本集合/Dog.gif" srcset="/img/loading.gif" lazyload 
-width="200" 
-alt="可爱小金毛" ></p>
+                <h2 id="某大专gpa计算小脚本">某大专GPA计算小脚本</h2>
+<h3 id="gpa计算规则">1. GPA计算规则</h3>
+<figure>
+<img src="GPA.png" srcset="/img/loading.gif" lazyload alt="GPA计算详细规则" />
+<figcaption aria-hidden="true">GPA计算详细规则</figcaption>
+</figure>
+<h3 id="python脚本">2. Python脚本</h3>
+<h4 id="安装依赖包">安装依赖包</h4>
+<p>该脚本有简单的GUI界面，需要使用到python的GUI库<code>tkinter</code>。</p>
+<p>测试是否有该依赖库。使用终端运行python后引入包<code>tkinter</code>，不报错，即可，如下：</p>
+<p><img src="1.png" srcset="/img/loading.gif" lazyload /></p>
+<p>若出现报错信息，则手动安装即可<code>pip install tk</code>：</p>
+<p><img src="2.png" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="源代码">源代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> filedialog<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">GPA</span>(<span class="hljs-params"><span class="hljs-built_in">list</span></span>):<br>    sum_credit = <span class="hljs-number">0</span>   <span class="hljs-comment"># 全部科目</span><br>    sum_credit_ = <span class="hljs-number">0</span>  <span class="hljs-comment"># 必修科目 (op == 1)</span><br>    sum_ave = <span class="hljs-number">0</span>      <span class="hljs-comment"># 全部</span><br>    sum_ave_ = <span class="hljs-number">0</span>     <span class="hljs-comment"># 必修</span><br>    sum_gpa = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> sub <span class="hljs-keyword">in</span> <span class="hljs-built_in">list</span>:<br>        credit = sub[<span class="hljs-number">1</span>]<br>        score = sub[<span class="hljs-number">2</span>]<br>        op = sub[<span class="hljs-number">3</span>]  <span class="hljs-comment"># 必修科目 (op == 1)</span><br>        gpa = <span class="hljs-number">4.0</span> - (<span class="hljs-number">100</span> - score) ** <span class="hljs-number">2</span> * <span class="hljs-number">3.0</span> / <span class="hljs-number">1600.0</span><br>        <span class="hljs-keyword">if</span> score &lt; <span class="hljs-number">60</span>:<br>            gpa = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">elif</span> score == <span class="hljs-number">60</span>:<br>            gpa = <span class="hljs-number">1.0</span><br>        sum_gpa += gpa * credit<br>        <span class="hljs-keyword">if</span> op == <span class="hljs-number">1</span>:<br>            sum_ave_ += score * credit<br>            sum_credit_ += credit<br>        sum_ave += score * credit<br>        sum_credit += credit<br>    gpa = sum_gpa / sum_credit<br>    ave = sum_ave / sum_credit  <span class="hljs-comment">#全部课加权平均分</span><br>    ave_ = sum_ave_ / sum_credit_ <span class="hljs-keyword">if</span> sum_credit_ != <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span> <span class="hljs-comment">#必修课加权平均分</span><br>    <span class="hljs-keyword">return</span> [gpa, ave, ave_]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">open_file</span>():<br>    <span class="hljs-keyword">global</span> term_text, sum_data_labels, term_labels<br>    filepath = filedialog.askopenfilename(<br>        title=<span class="hljs-string">&quot;选择文件&quot;</span>,<br>        filetypes=((<span class="hljs-string">&quot;Text files&quot;</span>, <span class="hljs-string">&quot;*.txt&quot;</span>), (<span class="hljs-string">&quot;All files&quot;</span>, <span class="hljs-string">&quot;*.*&quot;</span>))<br>    )<br>    subject = []  <span class="hljs-comment"># 所有学期课程的数据列表</span><br>    term = [[] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)] <span class="hljs-comment">#各学期课程的数据列表</span><br>    count = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> filepath:<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filepath, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>, mode=<span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            line = f.readline().strip()<br>            <span class="hljs-built_in">print</span>(line,end=<span class="hljs-string">&#x27;\n&#x27;</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> line:<br>                <span class="hljs-keyword">break</span><br>            items = line.split()<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(items) == <span class="hljs-number">1</span>:<br>                count += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(items) == <span class="hljs-number">4</span>:<br>                this_name, this_credit, this_score, this_op = items<br>                subject.append([this_name, <span class="hljs-built_in">float</span>(this_credit), <span class="hljs-built_in">float</span>(this_score), <span class="hljs-built_in">int</span>(this_op)])<br>                term[count].append([this_name, <span class="hljs-built_in">float</span>(this_credit), <span class="hljs-built_in">float</span>(this_score), <span class="hljs-built_in">int</span>(this_op)])<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;读取完毕&quot;</span>)<br>                <span class="hljs-keyword">return</span><br>    sum_data = GPA(subject)<br>    Term = [GPA(term[i+<span class="hljs-number">1</span>]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(count)]<br><br>    <span class="hljs-comment"># 清除旧的数据</span><br>    term_text.delete(<span class="hljs-string">&#x27;1.0&#x27;</span>, tk.END)<br>    <span class="hljs-keyword">for</span> i, term <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(Term):<br>        term_text.insert(tk.END, <span class="hljs-string">f&quot;Term <span class="hljs-subst">&#123;i + <span class="hljs-number">1</span>&#125;</span>: GPA=<span class="hljs-subst">&#123;term[<span class="hljs-number">0</span>]:<span class="hljs-number">.4</span>f&#125;</span>, 全部课加权平均=<span class="hljs-subst">&#123;term[<span class="hljs-number">1</span>]:<span class="hljs-number">.4</span>f&#125;</span>,必修课加权平均=<span class="hljs-subst">&#123;term[<span class="hljs-number">2</span>]:<span class="hljs-number">.4</span>f&#125;</span>\n&quot;</span>)<br><br>    <span class="hljs-comment"># 更新总成绩信息</span><br>    sum_data_labels[<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;text&#x27;</span>] = <span class="hljs-string">f&quot;所有学期GPA: <span class="hljs-subst">&#123;sum_data[<span class="hljs-number">0</span>]:<span class="hljs-number">.4</span>f&#125;</span>&quot;</span><br>    sum_data_labels[<span class="hljs-number">1</span>][<span class="hljs-string">&#x27;text&#x27;</span>] = <span class="hljs-string">f&quot;所有学期所有课程加权平均: <span class="hljs-subst">&#123;sum_data[<span class="hljs-number">1</span>]:<span class="hljs-number">.4</span>f&#125;</span>&quot;</span><br>    sum_data_labels[<span class="hljs-number">2</span>][<span class="hljs-string">&#x27;text&#x27;</span>] = <span class="hljs-string">f&quot;所有学期必修课程加权平均: <span class="hljs-subst">&#123;sum_data[<span class="hljs-number">2</span>]:<span class="hljs-number">.4</span>f&#125;</span>&quot;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">create_gui</span>():<br>    root = tk.Tk()<br>    root.title(<span class="hljs-string">&quot;File Reader&quot;</span>)<br><br>    button = tk.Button(root, text=<span class="hljs-string">&quot;Open File&quot;</span>, command=open_file)<br>    button.pack()<br><br>    <span class="hljs-comment"># 创建一个 Text 控件来显示学期成绩信息</span><br>    <span class="hljs-keyword">global</span> term_text<br>    term_text = tk.Text(root, wrap=tk.WORD)<br>    term_text.pack(expand=<span class="hljs-literal">True</span>, fill=tk.BOTH)<br><br>    <span class="hljs-comment"># 创建 Label 控件来显示总成绩信息</span><br>    <span class="hljs-keyword">global</span> sum_data_labels<br>    sum_data_labels = [<br>        tk.Label(root, text=<span class="hljs-string">&quot;Total GPA:&quot;</span>),<br>        tk.Label(root, text=<span class="hljs-string">&quot;Total Average:&quot;</span>),<br>        tk.Label(root, text=<span class="hljs-string">&quot;Required Average:&quot;</span>)<br>    ]<br>    <span class="hljs-keyword">for</span> label <span class="hljs-keyword">in</span> sum_data_labels:<br>        label.pack()<br><br>    root.mainloop()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    create_gui()<br></code></pre></td></tr></table></figure>
+<p>上述代码中有相关的注释，若GPA计算方法不同，可更改<code>GPA()</code>函数部分。</p>
 
                 
               </div>
@@ -317,12 +327,12 @@ alt="可爱小金毛" ></p>
     
       <span class="category-chain">
         
-  <a href="/categories/Bolgs/" class="category-chain-item">Bolgs</a>
+  <a href="/categories/Notes/" class="category-chain-item">Notes</a>
   
   
     <span>></span>
     
-  <a href="/categories/Bolgs/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/" class="category-chain-item">Python实用小脚本</a>
+  <a href="/categories/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/" class="category-chain-item">Python实用小脚本</a>
   
   
 
@@ -344,8 +354,8 @@ alt="可爱小金毛" ></p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Python实用小脚本集合</div>
-      <div>https://ljxkkk0.github.io/Bolgs/Python实用小脚本/Python实用小脚本集合/</div>
+      <div>GPACalculating</div>
+      <div>https://ljxkkk0.github.io/Notes/Python实用小脚本/GPACalculating/</div>
     </div>
     <div class="license-meta">
       
@@ -389,18 +399,12 @@ alt="可爱小金毛" ></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/" title="GPACalculating">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GPACalculating</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Blogs/12306TicketBooking/" title="12306TicketBooking">
-                        <span class="hidden-mobile">12306TicketBooking</span>
+                      <a href="/Bolgs/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC%E9%9B%86%E5%90%88/" title="Python实用小脚本集合">
+                        <span class="hidden-mobile">Python实用小脚本集合</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -433,17 +437,17 @@ alt="可爱小金毛" ></p>
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Bolgs"
-        id="heading-4dfbaa18e9c62044137bf8f992c703b4" role="tab" data-toggle="collapse" href="#collapse-4dfbaa18e9c62044137bf8f992c703b4"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Notes"
+        id="heading-f4c6f851b00d5518bf888815de279aba" role="tab" data-toggle="collapse" href="#collapse-f4c6f851b00d5518bf888815de279aba"
         aria-expanded="true"
       >
-        Bolgs
-        <span class="list-group-count">(1)</span>
+        Notes
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-4dfbaa18e9c62044137bf8f992c703b4"
-           role="tabpanel" aria-labelledby="heading-4dfbaa18e9c62044137bf8f992c703b4">
+      <div class="category-collapse collapse show" id="collapse-f4c6f851b00d5518bf888815de279aba"
+           role="tabpanel" aria-labelledby="heading-f4c6f851b00d5518bf888815de279aba">
         
         
           
@@ -479,10 +483,47 @@ alt="可爱小金毛" ></p>
     
       
       
-        <a href="/Bolgs/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC%E9%9B%86%E5%90%88/" title="Python实用小脚本集合"
+        <a href="/Notes/Python%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/GPACalculating/" title="GPACalculating"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Python实用小脚本集合</span>
+          <span class="category-post">GPACalculating</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="网络攻防技术"
+        id="heading-01d79172f3c09c31b40a7852ee25c584" role="tab" data-toggle="collapse" href="#collapse-01d79172f3c09c31b40a7852ee25c584"
+        aria-expanded="false"
+      >
+        网络攻防技术
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-01d79172f3c09c31b40a7852ee25c584"
+           role="tabpanel" aria-labelledby="heading-01d79172f3c09c31b40a7852ee25c584">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/" title="DVWA靶场"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">DVWA靶场</span>
         </a>
       
     
