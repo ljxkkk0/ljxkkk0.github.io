@@ -1,0 +1,1545 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ljx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="DVWA靶场学习笔记  DVWA(Damn Vulnerable Web Application)一个用来进行安全脆弱性鉴定的PHP&#x2F;MySQL Web 应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。本文包含DVWA靶场的环境配置、Burp工具配置以及DVWA靶场各漏洞high level的测试（靶场的漏洞均分为low">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DVWA靶场">
+<meta property="og:url" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/index.html">
+<meta property="og:site_name" content="Jason&#39;s Blog">
+<meta property="og:description" content="DVWA靶场学习笔记  DVWA(Damn Vulnerable Web Application)一个用来进行安全脆弱性鉴定的PHP&#x2F;MySQL Web 应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。本文包含DVWA靶场的环境配置、Burp工具配置以及DVWA靶场各漏洞high level的测试（靶场的漏洞均分为low">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.5.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.6.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.7.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.8.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/2.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/3.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/3.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/3.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/4.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/4.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/5.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/5.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/5.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/6.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/6.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/6.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/7.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/7.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/7.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/7.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/7.5.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/7.6.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/8.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/8.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/8.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/8.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.5.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.6.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/9.7.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/10.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/10.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/10.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/10.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/10.5.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/10.6.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/11.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/11.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/12.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/12.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/12.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/12.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/12.5.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/12.6.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/13.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/13.2.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/13.3.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/13.4.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/13.5.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/13.6.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/14.1.png">
+<meta property="og:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/14.2.png">
+<meta property="article:published_time" content="2024-07-26T09:24:03.566Z">
+<meta property="article:modified_time" content="2024-07-29T07:07:14.524Z">
+<meta property="article:author" content="ljx">
+<meta property="article:tag" content="-[网络攻防技术，学习笔记]">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ljxkkk0.github.io/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/DVWA%E9%9D%B6%E5%9C%BA/1.1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>DVWA靶场 - Jason&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ljxkkk0.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":100,"cursorChar":"...","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jason&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="DVWA靶场"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-26 17:24" pubdate>
+          2024年7月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.9k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">DVWA靶场</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="dvwa靶场学习笔记">DVWA靶场学习笔记</h2>
+<p style="text-align: justify;">
+DVWA(Damn Vulnerable Web
+Application)一个用来进行安全脆弱性鉴定的PHP/MySQL Web
+应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。本文包含DVWA靶场的环境配置、Burp工具配置以及DVWA靶场各漏洞high
+level的测试（靶场的漏洞均分为low/medium/high）。
+<p/>
+<span id="more"></span>
+<h3 id="一环境配置">一、环境配置</h3>
+<p>该部分主要参考各种帖子</p>
+<ol type="1">
+<li><p>VirtualBox安装win10虚拟机：</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="http://t.csdnimg.cn/ymk08">win10镜像下载</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded" aria-label="">[1]</span></a></sup><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="http://t.csdnimg.cn/HdS64">VirtualBox中安装win10虚拟机</a><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded" aria-label="">[2]</span></a></sup></li>
+<li>出现的问题：
+<ul>
+<li>安装时win10虚拟机蓝屏报错：无法获取[ ProductKey]，<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/ranzhong/p/18033320">参考</a><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded" aria-label="">[3]</span></a></sup><br />
+</li>
+<li>虚拟机安装virtualbox增强包，针对点击虚拟机头部导航栏中的设备 -&gt;
+安装增强功能没有反应的情况，<a
+target="_blank" rel="noopener" href="http://t.csdnimg.cn/eDx0C">参考</a><sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded" aria-label="">[4]</span></a></sup></li>
+</ul></li>
+</ul></li>
+<li><p><a
+target="_blank" rel="noopener" href="http://t.csdnimg.cn/CHfO3">靶场搭建</a><sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="">[4]</span></a></sup></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="http://t.csdnimg.cn/JqHfM">BurpSuite安装及使用</a><sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="">[5]</span></a></sup></p></li>
+</ol>
+<h3 id="二靶场测试">二、靶场测试</h3>
+<h4 id="burte-force暴力破解">1. Burte Force（暴力破解）</h4>
+<p style="text-align: justify;">
+“暴力破解”是一攻击手段，在web攻击中，一般会使用这种手段对应用系统的认证信息进行获取。其过程就是使用大量的认证信息在认证接口进行尝试登录，直到得到正确的结果。为了提高效率，暴力破解一般会使用带有字典的工具来进行自动化操作。
+<p/>
+<h5 id="测试过程">1.1 测试过程</h5>
+<p>使用admin/1234尝试登录，并使用Brup抓包如下：</p>
+<figure>
+<img src="1.1.png" srcset="/img/loading.gif" lazyload alt="提示口令错误" />
+<figcaption aria-hidden="true">提示口令错误</figcaption>
+</figure>
+<p>页面提示用户名或密码不正确，使用Burp截获数据包，并将数据包发送到Intruder选项卡，选择Positions：</p>
+<figure>
+<img src="1.2.png" srcset="/img/loading.gif" lazyload alt="截获数据包" />
+<figcaption aria-hidden="true">截获数据包</figcaption>
+</figure>
+<figure>
+<img src="1.3.png" srcset="/img/loading.gif" lazyload alt="发送到Intruder中" />
+<figcaption aria-hidden="true">发送到Intruder中</figcaption>
+</figure>
+<p>选定破解模式后配置相关参数：</p>
+<p>找到token的值如下：</p>
+<figure>
+<img src="1.4.png" srcset="/img/loading.gif" lazyload alt="找到token" />
+<figcaption aria-hidden="true">找到token</figcaption>
+</figure>
+<p>设置payload1，引入<a
+target="_blank" rel="noopener" href="https://weakpass.com/">弱口令字典</a><sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="弱口令字典下载地址：">[7]</span></a></sup>（根据需要配置）：</p>
+<figure>
+<img src="1.5.png" srcset="/img/loading.gif" lazyload alt="设置payload1" />
+<figcaption aria-hidden="true">设置payload1</figcaption>
+</figure>
+<p>设置payload2，选择类型为[Recursive
+grep]，将复制的token的值赋给第一个请求：</p>
+<figure>
+<img src="1.6.png" srcset="/img/loading.gif" lazyload alt="设置payload2" />
+<figcaption aria-hidden="true">设置payload2</figcaption>
+</figure>
+<p>查看爆破结果(回复报文中length不一样的代表攻击成功)：</p>
+<figure>
+<img src="1.7.png" srcset="/img/loading.gif" lazyload alt="查看结果" />
+<figcaption aria-hidden="true">查看结果</figcaption>
+</figure>
+<p>验证攻击结果：使用admin/passwrod（由爆破报文中对应的payload1值可知）登录验证，登录成功。如下所示：</p>
+<figure>
+<img src="1.8.png" srcset="/img/loading.gif" lazyload alt="登录验证" />
+<figcaption aria-hidden="true">登录验证</figcaption>
+</figure>
+<h5 id="修复建议">1.2 修复建议</h5>
+<ul>
+<li>要求用户设置复杂的密码；<br />
+</li>
+<li>每次认证都使用安全的验证码；<br />
+</li>
+<li>对尝试登录的行为进行判断和限制（如：连续5次错误登录，进行账号锁定或IP地址锁定等）；<br />
+</li>
+<li>采用双因素认证；</li>
+</ul>
+<h4 id="command-injection命令注入">2. Command Injection（命令注入）</h4>
+<p style="text-align: justify;">
+命令注入漏洞也可被称为“远程代码执行”（RCE），因为攻击者通过命令注入漏洞可以尝试诱使web应用程序执行他们所提供的一系列有效载荷（在web应用程序中远程执行代码），而无需直接访问目标机器本身（例如：通过交互式shell的方式）。Web服务器将在运行该web应用程序的用户的权限下以及相关访问控制级别下处理并执行攻击者所提供的payload代码。
+<p/>
+<h5 id="测试过程-1">2.1 测试过程</h5>
+<p>查看对应源码：</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-comment">// Get input</span><br>	$target = trim($_REQUEST[ <span class="hljs-string">&#x27;ip&#x27;</span> ]);<br><br>	<span class="hljs-comment">// Set blacklist</span><br>	$substitutions = <span class="hljs-keyword">array</span>(<br>		<span class="hljs-string">&#x27;&amp;&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;;&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;| &#x27;</span> =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;-&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;$&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;(&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;)&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;`&#x27;</span>  =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>		<span class="hljs-string">&#x27;||&#x27;</span> =&gt; <span class="hljs-string">&#x27;&#x27;</span>,<br>	);<br><br>	<span class="hljs-comment">// Remove any of the characters in the array (blacklist).</span><br>	$target = str_replace( array_keys( $substitutions ), $substitutions, $target );<br></code></pre></td></tr></table></figure>
+<p style="text-align: justify;">
+若输入为<code>|| whoami</code>经过上述规则替换后为<code>|whoami</code>则会执行<code>ping | whoami</code>，实际测试结果如下：
+<p/>
+<figure>
+<img src="2.1.png" srcset="/img/loading.gif" lazyload alt="攻击结果" />
+<figcaption aria-hidden="true">攻击结果</figcaption>
+</figure>
+<p>如上所见，成功执行注入的命令。</p>
+<h5 id="修复建议-1">2.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+限定输入类型, 创建一份安全字符串列表，限制用户只能输入该列表中的数据；
+<p/></li>
+<li><p style="text-align: justify;">
+尽量不要使用命令执行函数；
+<p/></li>
+<li><p style="text-align: justify;">
+客户端提交的变量在进入执行命令函数前要做好过滤和检测；
+<p/></li>
+<li><p style="text-align: justify;">
+在使用动态函数之前，确保使用的函数是指定的函数之一。
+<p/></li>
+</ul>
+<h4 id="cross-site-request-forgery-csrf跨站请求伪造">3. Cross Site
+Request Forgery （CSRF：跨站请求伪造）</h4>
+<p style="text-align: justify;">
+CSRF（跨站请求伪造），全称为Cross-site request
+forgery，简单来说，是攻击者利用受害者尚未失效的身份认证信息，诱骗受害者点击恶意链接或含有攻击代码的页面，在受害者不知情的情况下以受害者的身份像服务器发起请求，从而实现非法攻击。
+<p/>
+<h5 id="测试过程-2">3.1 测试过程</h5>
+<p>漏洞分析：</p>
+<p style="text-align: justify;">
+High级别的代码增加了Anti-CSRF
+token机制，用户每次访问改密页面时，服务器会返回一个随机的token，向服务器发起请求时，需要提交token参数，而服务器在收到请求时，会优先检查token，只有token正确，才会处理客户端请求。
+<p/>
+<p>具体测试：</p>
+<ol type="a">
+<li><a href="#XSS">利用XSS获取token</a></li>
+</ol>
+<p>利用反射型XSS攻击输入<code>&lt;img src =1 onerror = alert(document.cookie)&gt;</code>获取cookie</p>
+<figure>
+<img src="3.1.png" srcset="/img/loading.gif" lazyload alt="获取cookie" />
+<figcaption aria-hidden="true">获取cookie</figcaption>
+</figure>
+<ol start="2" type="a">
+<li>伪造修改密码的请求并使用Burp修改其cookie为XSS攻击得到的cookie</li>
+</ol>
+<figure>
+<img src="3.2.png" srcset="/img/loading.gif" lazyload alt="伪造请求" />
+<figcaption aria-hidden="true">伪造请求</figcaption>
+</figure>
+<p>返回结果显示攻击成功：</p>
+<figure>
+<img src="3.3.png" srcset="/img/loading.gif" lazyload alt="攻击成功" />
+<figcaption aria-hidden="true">攻击成功</figcaption>
+</figure>
+<h5 id="修复建议-2">3.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+使用CSRF令牌：在每个敏感操作的表单或请求中加入一个唯一的CSRF令牌，该令牌在服务器端生成并验证。攻击者无法轻易获取或伪造这个令牌;
+<p/></li>
+<li><p style="text-align: justify;">
+检查Referer头：检查请求的Referer头，以确认请求来源是否为同一站点；
+<p/></li>
+<li><p style="text-align: justify;">
+双重提交Cookie：将CSRF令牌存储在Cookie中，并在请求中包含同样的令牌，服务器验证两者是否一致；
+<p/></li>
+<li><p style="text-align: justify;">
+限制请求方法：对于敏感操作只允许POST、PUT、DELETE等非GET方法，因为GET请求更容易被外部引用。
+<p/></li>
+</ul>
+<h4 id="file-inclusion文件包含漏洞">4. File
+Inclusion（文件包含漏洞）</h4>
+<p style="text-align: justify;">
+File
+Inclusion（文件包含），是指当服务器开启了<code>allow_url_include</code>选项时，通过一些PHP的特性函数（比如：<code>include()</code>，<code>require()</code>，<code>include_once()</code>和<code>require_once()</code>）利用URL去动态包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。
+<p/>
+<h5 id="测试过程-3">4.1 测试过程</h5>
+<p>源码分析：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// The page we wish to display</span><br><span class="hljs-variable">$file</span> = <span class="hljs-variable">$_GET</span>[ <span class="hljs-string">&#x27;page&#x27;</span> ];<br><br><span class="hljs-comment">// Input validation</span><br><span class="hljs-comment">//文件名必须以file开始，或只能为include.php</span><br><span class="hljs-keyword">if</span>( !<span class="hljs-title function_ invoke__">fnmatch</span>( <span class="hljs-string">&quot;file*&quot;</span>, <span class="hljs-variable">$file</span> ) &amp;&amp; <span class="hljs-variable">$file</span> != <span class="hljs-string">&quot;include.php&quot;</span> ) &#123;<br>    <span class="hljs-comment">// This isn&#x27;t the page we want!</span><br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;ERROR: File not found!&quot;</span>;<br>    <span class="hljs-keyword">exit</span>;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>漏洞分析：可以使用伪协议<code>file://</code>访问其本地文件。</p>
+<p>攻击测试：</p>
+<p>正常访问网页提供的文件时的URL如下：</p>
+<figure>
+<img src="4.1.png" srcset="/img/loading.gif" lazyload alt="正常访问" />
+<figcaption aria-hidden="true">正常访问</figcaption>
+</figure>
+<p style="text-align: justify;">
+利用<code>file://</code>构造恶意的URL<br/>
+<code>http://dvwapractice:8080/vulnerabilities/fi/?page=file:///C:/APP/phpstudy_pro/WWW/DvwaPractice/phpinfo.php</code><br/>非法访问本地文件：
+<p/>
+<figure>
+<img src="4.2.png" srcset="/img/loading.gif" lazyload alt="非法访问" />
+<figcaption aria-hidden="true">非法访问</figcaption>
+</figure>
+<h5 id="修复建议-3">4.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+使用白名单机制：定义允许的文件列表，确保只包含预定义的安全文件；
+<p/></li>
+<li><p style="text-align: justify;">
+限制目录访问：通过设置安全目录并使用 realpath
+确保包含的文件位于安全目录中，防止路径穿越攻击；
+<p/></li>
+<li><p style="text-align: justify;">
+严格验证输入：使用 realpath 和 strpos
+检查文件路径，确保文件在预期的目录中。
+<p/></li>
+</ul>
+<h4 id="file-upload文件上传">5. File Upload（文件上传）</h4>
+<p style="text-align: justify;">
+文件上传攻击是指攻击者通过上传恶意文件到服务器，从而执行恶意代码、获取系统权限或进行其他恶意操作的一种攻击方式。这种攻击通常利用文件上传功能中的安全漏洞来实现，具有较高的威胁性。
+<p/>
+<h5 id="测试过程-4">5.1 测试过程</h5>
+<p>制作简单的图片马：</p>
+<p><img src="5.1.png" srcset="/img/loading.gif" lazyload /></p>
+<p>上传图片马：</p>
+<p><img src="5.2.png" srcset="/img/loading.gif" lazyload /></p>
+<p style="text-align: justify;">
+利用前述的文件包含漏洞，触发该图片马：<br/>
+<code>http://dvwapractice:8080/vulnerabilities/fi/?page=file:///C:/APP/phpstudy_pro/WWW/DvwaPractice/hackable/uploads/Trojan.png</code>
+<p/>
+<p><img src="5.3.png" srcset="/img/loading.gif" lazyload /></p>
+<h5 id="修复建议-4">5.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+检查文件扩展名，只允许上传白名单内的文件；
+<p/></li>
+<li><p style="text-align: justify;">
+确保文件名不包含任何可能被解释为目录或遍历序列 ( ../) 的子字符串；
+<p/></li>
+<li><p style="text-align: justify;">
+重命名上传的文件以避免可能导致现有文件被覆盖的冲突；
+<p/></li>
+<li><p style="text-align: justify;">
+隐藏上传文件路径；
+<p/></li>
+<li><p style="text-align: justify;">
+上传文件的存储目录禁用执行权限。
+<p/></li>
+</ul>
+<h4 id="insecure-captcha不安全的验证码">6. Insecure
+CAPTCHA（不安全的验证码）</h4>
+<p style="text-align: justify;">
+不安全的验证码（Insecure
+CAPTCHA）指的是一种验证机制设计或实现上存在漏洞，无法有效阻止自动化脚本或恶意用户的攻击，从而使得其保护网站或应用的功能失效。
+<p/>
+<h5 id="测试过程-5">6.1 测试过程</h5>
+漏洞分析：
+<p style="text-align: justify;">
+服务器的验证逻辑是当<code>$resp</code>是<code>ture</code>，或者参数<code>recaptcha_response_field</code>等于<code>hidd3n_valu3</code>且<code>http</code>包头的<code>User-Agent</code>参数等于<code>reCAPTCHA</code>时，则认为已经通过了验证码的检查。其中<code>resp</code>参数是由指谷歌返回的验证结果，参数<code>recaptcha_response_field</code>和<code>User-Agent</code>在客户端发送的数据包中。因此仅需伪造客户端的数据包，正确设置参数即可绕过验证机制。
+<p/>
+<p>测试过程：</p>
+<p>首先抓包：</p>
+<figure>
+<img src="6.1.png" srcset="/img/loading.gif" lazyload alt="抓包" />
+<figcaption aria-hidden="true">抓包</figcaption>
+</figure>
+<p style="text-align: justify;">
+修改数据包参数使得<code>$_POST['g-recaptcha-response']=='hidd3n_valu3'</code>以及<code>$_SERVER[ 'HTTP_USER_AGENT' ]== 'reCAPTCHA'</code>，具体如下：
+<p/>
+<figure>
+<img src="6.2.png" srcset="/img/loading.gif" lazyload alt="修改参数" />
+<figcaption aria-hidden="true">修改参数</figcaption>
+</figure>
+<p>将修改后的数据包放行后成功修改口令，返回如下界面：</p>
+<figure>
+<img src="6.3.png" srcset="/img/loading.gif" lazyload alt="攻击成功" />
+<figcaption aria-hidden="true">攻击成功</figcaption>
+</figure>
+<h5 id="修复建议-5">6.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+增加<code>Anti-CSRF token</code>
+机制防御CSRF攻击，利用PDO技术防护sql注入，同时要求用户输入之前的密码，进一步加强了身份认证；
+<p/></li>
+<li><p style="text-align: justify;">
+服务器端验证：确保所有验证逻辑在服务器端进行，防止客户端篡改；
+<p/></li>
+<li><p style="text-align: justify;">
+使用多种验证方式：结合图片选择、拖动验证、音频验证码等多种方式，增加破解难度。
+<p/></li>
+</ul>
+<h4 id="sql-injectionsql注入">7. SQL Injection（SQL注入）</h4>
+<p style="text-align: justify;">
+SQL是操作数据库数据的结构化查询语言，网页的应用数据和后台数据库中的数据进行交互时会采用SQL。而SQL注入是将Web页面的原URL、表单域或数据包输入的参数，修改拼接成SQL语句，传递给Web服务器，进而传给数据库服务器以执行数据库命令。如Web应用程序的开发人员对用户所输入的数据或cookie等内容不进行过滤或验证（即存在注入点）就直接传输给数据库，就可能导致拼接的SQL被执行，获取对数据库的信息以及提权，发生SQL注入攻击。
+<p/>
+<h5 id="测试过程-6">7.1 测试过程</h5>
+<p>进行字符型和整数型注入测试，发现存在注入漏洞，并查出所有ID内容：</p>
+<figure>
+<img src="7.1.png" srcset="/img/loading.gif" lazyload alt="测试注入类型" />
+<figcaption aria-hidden="true">测试注入类型</figcaption>
+</figure>
+<p>进一步构造注入，查询返回的字段数。字段2成功返回查询结果：</p>
+<figure>
+<img src="7.2.png" srcset="/img/loading.gif" lazyload alt="字段值2查询成功" />
+<figcaption aria-hidden="true">字段值2查询成功</figcaption>
+</figure>
+<p>字段3查询失败，由此可知，查询结果包含2个字段：</p>
+<figure>
+<img src="7.3.png" srcset="/img/loading.gif" lazyload alt="字段值3查询失败" />
+<figcaption aria-hidden="true">字段值3查询失败</figcaption>
+</figure>
+<p>根据漏洞查询其他信息。查询数据库名称：</p>
+<figure>
+<img src="7.4.png" srcset="/img/loading.gif" lazyload alt="查询数据库名" />
+<figcaption aria-hidden="true">查询数据库名</figcaption>
+</figure>
+<p>查询表名：</p>
+<figure>
+<img src="7.5.png" srcset="/img/loading.gif" lazyload alt="查询表项名" />
+<figcaption aria-hidden="true">查询表项名</figcaption>
+</figure>
+<p>查询用户名以及其登录口令：</p>
+<figure>
+<img src="7.6.png" srcset="/img/loading.gif" lazyload alt="查询用户名以及其登录口令" />
+<figcaption aria-hidden="true">查询用户名以及其登录口令</figcaption>
+</figure>
+<h5 id="修复建议-6">7.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+使用预处理语句（Prepared
+Statements）：预处理语句将SQL代码和数据分离，避免了攻击者插入恶意代码；
+<p/></li>
+<li><p style="text-align: justify;">
+最小权限原则：仅授予数据库用户所需的最低权限，避免使用拥有过多权限的数据库账户执行查询；
+<p/></li>
+<li><p style="text-align: justify;">
+使用ORM（对象关系映射）：ORM工具将数据库操作抽象成对象，使得SQL注入更加困难。常见的ORM包括Django
+ORM、SQLAlchemy等。
+<p/></li>
+</ul>
+<h4 id="sql-injection-blindsql注入盲注">8. SQL Injection
+Blind（SQL注入：盲注）</h4>
+<p style="text-align: justify;">
+盲注（Blind SQL Injection）是 SQL
+注入的一种特殊形式，攻击者无法直接获取数据库的错误消息或查询结果，只能通过观察应用程序的行为变化来推断数据库的响应。
+<p/>
+<h5 id="测试过程-7">8.1 测试过程</h5>
+<p>尝试判断注入类型：</p>
+<figure>
+<img src="8.1.png" srcset="/img/loading.gif" lazyload alt="尝试1" />
+<figcaption aria-hidden="true">尝试1</figcaption>
+</figure>
+<figure>
+<img src="8.2.png" srcset="/img/loading.gif" lazyload alt="尝试2" />
+<figcaption aria-hidden="true">尝试2</figcaption>
+</figure>
+<p>由上述尝试可判定存在字符型注入。</p>
+<p>接下来尝试判断数据库名的长度：</p>
+<figure>
+<img src="8.3.png" srcset="/img/loading.gif" lazyload alt="尝试length=3" />
+<figcaption aria-hidden="true">尝试length=3</figcaption>
+</figure>
+<figure>
+<img src="8.4.png" srcset="/img/loading.gif" lazyload alt="尝试length=4" />
+<figcaption aria-hidden="true">尝试length=4</figcaption>
+</figure>
+<p>由此判断数据库名称长度为4。</p>
+<h5 id="修复建议-7">8.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+使用预编译语句（Prepared
+Statements）：预编译语句使用参数化查询，可以有效防止 SQL 注入。
+<p/></li>
+<li><p style="text-align: justify;">
+输入验证和输出编码：对用户输入进行严格验证和清理，防止恶意输入。在输出到
+HTML、JavaScript 等环境时，进行正确的编码；
+<p/></li>
+<li><p style="text-align: justify;">
+最小特权原则：数据库用户权限设置为最低，防止通过 SQL 注入获得更高权限；
+<p/></li>
+<li><p style="text-align: justify;">
+数据库防护机制：使用 Web
+应用防火墙（WAF）和数据库防火墙，检测和阻止恶意请求。
+<p/></li>
+</ul>
+<h4 id="weak-session-ids弱会话">9. Weak Session IDs（弱会话）</h4>
+<p style="text-align: justify;">
+弱会话ID（Weak Session
+IDs）指的是在网络应用程序中，生成和管理用户会话的标识符（Session
+ID）存在安全性问题，容易被攻击者猜测、窃取或篡改，从而导致用户会话被劫持。
+<p/>
+<h5 id="测试过程-8">9.1 测试过程</h5>
+<p>产生cookie并使用Burp截获数据包：</p>
+<figure>
+<img src="9.1.png" srcset="/img/loading.gif" lazyload alt="产生cookie" />
+<figcaption aria-hidden="true">产生cookie</figcaption>
+</figure>
+<figure>
+<img src="9.2.png" srcset="/img/loading.gif" lazyload alt="抓包" />
+<figcaption aria-hidden="true">抓包</figcaption>
+</figure>
+<p>手动清除浏览器cookie：</p>
+<figure>
+<img src="9.3.png" srcset="/img/loading.gif" lazyload alt="清除cookie" />
+<figcaption aria-hidden="true">清除cookie</figcaption>
+</figure>
+<p>验证再次访问时需要登录：</p>
+<figure>
+<img src="9.4.png" srcset="/img/loading.gif" lazyload alt="登录失效" />
+<figcaption aria-hidden="true">登录失效</figcaption>
+</figure>
+<p style="text-align: justify;">
+使用截获的cookie实现非登录访问。直接访问<code>http://dvwapractice:8080/vulnerabilities/weak_id/</code>，使用Burp截取请求数据包：
+<p/>
+<figure>
+<img src="9.5.png" srcset="/img/loading.gif" lazyload alt="非登录访问的数据包" />
+<figcaption aria-hidden="true">非登录访问的数据包</figcaption>
+</figure>
+<p>使用前述步骤截取的cookie替换该数据包的cookie：</p>
+<figure>
+<img src="9.6.png" srcset="/img/loading.gif" lazyload alt="使用先前截获的cookie" />
+<figcaption aria-hidden="true">使用先前截获的cookie</figcaption>
+</figure>
+<p>成功访问需要登录的页面内容：</p>
+<figure>
+<img src="9.7.png" srcset="/img/loading.gif" lazyload alt="成功访问" />
+<figcaption aria-hidden="true">成功访问</figcaption>
+</figure>
+<h5 id="修复建议-8">9.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+使用加密安全的随机生成器：采用加密安全的随机数生成器来生成会话ID，确保其难以预测和猜测；
+<p/></li>
+<li><p style="text-align: justify;">
+增加会话ID长度：会话ID应足够长（如128位或以上），以增加暴力破解的难度；
+<p/></li>
+<li><p style="text-align: justify;">
+确保唯一性：确保每个会话ID在全局范围内唯一，不重复；
+<p/></li>
+<li><p style="text-align: justify;">
+使用HTTPS加密传输：通过HTTPS协议加密传输会话ID，防止被中间人攻击拦截；
+<p/></li>
+<li><p style="text-align: justify;">
+设置会话有效期：为会话ID设置合理的过期时间，确保长时间未活动的会话自动失效；
+<p/></li>
+</ul>
+<h4 id="cross-site-scriptingxss跨站脚本攻击">10. Cross Site
+Scripting（XSS：跨站脚本攻击）</h4>
+<p style="text-align: justify;">
+跨站脚本攻击（Cross Site Scripting，简称
+XSS）是一种常见的Web安全漏洞，攻击者通过在目标网站中注入恶意脚本，使得这些脚本在其他用户的浏览器中执行，从而窃取用户数据、劫持用户会话、伪造用户操作等。主要分为：反射型
+XSS（Reflected XSS）、存储型 XSS（Stored XSS）和DOM 型 XSS（DOM-based
+XSS）。
+<p/>
+<h5 id="XSS">10.1 测试过程</h5>
+<ol type="a">
+<li>反射型XSS</li>
+</ol>
+<p>源码分析：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">header</span> (<span class="hljs-string">&quot;X-XSS-Protection: 0&quot;</span>);<br><span class="hljs-comment">// Is there any input?</span><br><span class="hljs-keyword">if</span>( <span class="hljs-title function_ invoke__">array_key_exists</span>( <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-variable">$_GET</span> ) &amp;&amp; <span class="hljs-variable">$_GET</span>[ <span class="hljs-string">&#x27;name&#x27;</span> ] != <span class="hljs-literal">NULL</span> ) &#123;<br>    <span class="hljs-comment">// Get input</span><br><span class="hljs-comment">//使用通配符，完全匹配script*N，所以有关script的标签全被过滤</span><br>    <span class="hljs-variable">$name</span> = <span class="hljs-title function_ invoke__">preg_replace</span>( <span class="hljs-string">&#x27;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$_GET</span>[ <span class="hljs-string">&#x27;name&#x27;</span> ] );<br><br>    <span class="hljs-comment">// Feedback for end user</span><br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;pre&gt;Hello $&#123;name&#125;&lt;/pre&gt;&quot;</span>;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p style="text-align: justify;">
+分析得知仅过滤<code>&lt; script &gt;</code>，尝试使用其他标签如<code>&lt;img&gt;</code>进行攻击，在输入框中填充<code>&lt;img src =1 onerror = alert("You'reAttacked")&gt;</code>，可见如下弹窗：
+<p/>
+<figure>
+<img src="10.1.png" srcset="/img/loading.gif" lazyload alt="反射型XSS" />
+<figcaption aria-hidden="true">反射型XSS</figcaption>
+</figure>
+<ol start="2" type="a">
+<li>存储型XSS</li>
+</ol>
+<p>源码分析：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br> <br><span class="hljs-keyword">if</span>( <span class="hljs-keyword">isset</span>( <span class="hljs-variable">$_POST</span>[ <span class="hljs-string">&#x27;btnSign&#x27;</span> ] ) ) &#123;<br>    <span class="hljs-comment">// Get input</span><br>    <span class="hljs-variable">$message</span> = <span class="hljs-title function_ invoke__">trim</span>( <span class="hljs-variable">$_POST</span>[ <span class="hljs-string">&#x27;mtxMessage&#x27;</span> ] );<br>    <span class="hljs-variable">$name</span>    = <span class="hljs-title function_ invoke__">trim</span>( <span class="hljs-variable">$_POST</span>[ <span class="hljs-string">&#x27;txtName&#x27;</span> ] );<br> <br>    <span class="hljs-comment">// Sanitize message input</span><br>    <span class="hljs-variable">$message</span> = <span class="hljs-title function_ invoke__">strip_tags</span>( <span class="hljs-title function_ invoke__">addslashes</span>( <span class="hljs-variable">$message</span> ) );<br>    <span class="hljs-variable">$message</span> = ((<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>]) &amp;&amp; <span class="hljs-title function_ invoke__">is_object</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>])) ? <span class="hljs-title function_ invoke__">mysqli_real_escape_string</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>],  <span class="hljs-variable">$message</span> ) : ((<span class="hljs-title function_ invoke__">trigger_error</span>(<span class="hljs-string">&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;</span>, E_USER_ERROR)) ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot;&quot;</span>));<br>    <span class="hljs-variable">$message</span> = <span class="hljs-title function_ invoke__">htmlspecialchars</span>( <span class="hljs-variable">$message</span> );<br> <br>    <span class="hljs-comment">// Sanitize name input</span><br>    <span class="hljs-variable">$name</span> = <span class="hljs-title function_ invoke__">preg_replace</span>( <span class="hljs-string">&#x27;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$name</span> );<br>    <span class="hljs-variable">$name</span> = ((<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>]) &amp;&amp; <span class="hljs-title function_ invoke__">is_object</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>])) ? <span class="hljs-title function_ invoke__">mysqli_real_escape_string</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>],  <span class="hljs-variable">$name</span> ) : ((<span class="hljs-title function_ invoke__">trigger_error</span>(<span class="hljs-string">&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;</span>, E_USER_ERROR)) ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot;&quot;</span>));<br> <br>    <span class="hljs-comment">// Update database</span><br>    <span class="hljs-variable">$query</span>  = <span class="hljs-string">&quot;INSERT INTO guestbook ( comment, name ) VALUES ( &#x27;<span class="hljs-subst">$message</span>&#x27;, &#x27;<span class="hljs-subst">$name</span>&#x27; );&quot;</span>;<br>    <span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">mysqli_query</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>],  <span class="hljs-variable">$query</span> ) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>( <span class="hljs-string">&#x27;&lt;pre&gt;&#x27;</span> . ((<span class="hljs-title function_ invoke__">is_object</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>])) ? <span class="hljs-title function_ invoke__">mysqli_error</span>(<span class="hljs-variable">$GLOBALS</span>[<span class="hljs-string">&quot;___mysqli_ston&quot;</span>]) : ((<span class="hljs-variable">$___mysqli_res</span> = <span class="hljs-title function_ invoke__">mysqli_connect_error</span>()) ? <span class="hljs-variable">$___mysqli_res</span> : <span class="hljs-literal">false</span>)) . <span class="hljs-string">&#x27;&lt;/pre&gt;&#x27;</span> );<br> <br>    <span class="hljs-comment">//mysql_close();</span><br>&#125;<br> <br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>发现对<code>name</code>字段仅作部分敏感字符的替换，替换存在可利用的漏洞。</p>
+<p>尝试在<code>name</code>栏输入恶意代码，发现存在输入长度限制:</p>
+<figure>
+<img src="10.2.png" srcset="/img/loading.gif" lazyload alt="存在输出长度限制" />
+<figcaption aria-hidden="true">存在输出长度限制</figcaption>
+</figure>
+<p style="text-align: justify;">
+使用Burp截取数据包，修改其中的<code>name</code>栏内容为恶意代码<code>&lt;img src =1 onerror = alert("You'reAttacked")&gt;</code>：
+<p/>
+<figure>
+<img src="10.3.png" srcset="/img/loading.gif" lazyload alt="截获并修改name字段" />
+<figcaption aria-hidden="true">截获并修改name字段</figcaption>
+</figure>
+<p>修改后放行数据包，客户端成功出现弹窗：</p>
+<figure>
+<img src="10.4.png" srcset="/img/loading.gif" lazyload alt="成功弹窗" />
+<figcaption aria-hidden="true">成功弹窗</figcaption>
+</figure>
+<p>再次填入正常数据后提交仍然出现弹窗，证明存储型XSS攻击成功：</p>
+<figure>
+<img src="10.5.png" srcset="/img/loading.gif" lazyload alt="再次弹窗" />
+<figcaption aria-hidden="true">再次弹窗</figcaption>
+</figure>
+<ol start="3" type="a">
+<li>DOM型XSS</li>
+</ol>
+<p>源码分析：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php">&lt;<br><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-comment">// Is there any input?</span><br><span class="hljs-keyword">if</span> ( <span class="hljs-title function_ invoke__">array_key_exists</span>( <span class="hljs-string">&quot;default&quot;</span>, <span class="hljs-variable">$_GET</span> ) &amp;&amp; !<span class="hljs-title function_ invoke__">is_null</span> (<span class="hljs-variable">$_GET</span>[ <span class="hljs-string">&#x27;default&#x27;</span> ]) ) &#123;<br><br>    <span class="hljs-comment"># White list the alLowable languages</span><br><span class="hljs-comment">//白名单，只允许French、English、German、Spanish</span><br>    <span class="hljs-keyword">switch</span> (<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;default&#x27;</span>]) &#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;French&quot;</span>:<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;English&quot;</span>:<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;German&quot;</span>:<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Spanish&quot;</span>:<br>            <span class="hljs-comment"># ok</span><br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-title function_ invoke__">header</span> (<span class="hljs-string">&quot;location: ?default=English&quot;</span>);<br>            <span class="hljs-keyword">exit</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p style="text-align: justify;">
+考虑在<code>English</code>后面使用<code>&amp;</code>或者<code>#</code>，构造url：<br/>
+<code>http://dvwapractice:8080/vulnerabilities/xss_d/?default=English#&lt;script&gt;alert("You'reAttacked")&lt;/script&gt;</code>
+<p/>
+<p>攻击效果如下：</p>
+<p><img src="10.6.png" srcset="/img/loading.gif" lazyload /></p>
+<h5 id="修复建议-9">10.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+输入验证和清理：对用户输入进行严格的验证和清理，过滤或编码特殊字符，防止恶意脚本注入。
+<p/></li>
+<li><p style="text-align: justify;">
+输出编码：对所有输出到浏览器的内容进行编码，特别是HTML、JavaScript、CSS等，防止注入的脚本被执行。
+<p/></li>
+<li><p style="text-align: justify;">
+使用安全库和框架：采用成熟的安全库和框架，如OWASP
+ESAPI，提供了防御XSS的功能。
+<p/></li>
+<li><p style="text-align: justify;">
+内容安全策略（CSP）：配置CSP
+HTTP头，限制浏览器加载和执行的资源，减少XSS攻击的风险。
+<p/></li>
+</ul>
+<h4 id="content-security-policy-csp-bypass内容安全策略绕过">11. Content
+Security Policy (CSP) Bypass（内容安全策略绕过）</h4>
+<p style="text-align: justify;">
+内容安全策略（Content Security
+Policy，CSP）是一种Web安全机制，通过指定允许加载的资源（如脚本、样式表、图像等）的来源，帮助防止跨站脚本攻击（XSS）等威胁。尽管CSP可以显著提高Web应用的安全性，但如果配置不当或存在漏洞，CSP策略也可能被绕过（CSP
+Bypass）。
+<p/>
+<h5 id="测试过程-9">11.1 测试过程</h5>
+<p>漏洞分析：</p>
+<p style="text-align: justify;">
+由题干可知，该页面计算<code>sum</code>时会调用<code>../..//vulnerabilities/csp/source/jsonp.php</code>中的函数，结合Burp抓取的数据包：
+<p/>
+<p><img src="11.1.png" srcset="/img/loading.gif" lazyload /></p>
+<p>尝试对参数<code>callback</code>进行注入：</p>
+<p><code>include=&lt;script src="source/jsonp.php?callback=alert('xss');"&gt;&lt;/script&gt;</code></p>
+<p>攻击成功：</p>
+<figure>
+<img src="11.2.png" srcset="/img/loading.gif" lazyload alt="使用浏览器发送攻击参数" />
+<figcaption aria-hidden="true">使用浏览器发送攻击参数</figcaption>
+</figure>
+<h5 id="修复建议-10">11.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+禁止内联脚本和事件处理程序：使用<code>unsafe-inline</code>会降低CSP的安全性，应避免允许内联脚本。可以使用哈希或<code>Nonce</code>来允许特定的内联脚本。
+<p/></li>
+</ul>
+<h4 id="javascript-attacks-js脚本攻击">12. JavaScript Attacks
+（JS脚本攻击）</h4>
+<p style="text-align: justify;">
+JavaScript攻击是指利用JavaScript代码进行的各种网络攻击。由于JavaScript在现代Web开发中的广泛使用，它成为攻击者的一个主要目标。常见的攻击类型有：XSS（跨站脚本攻击）、CSRF（跨站伪造攻击）、Clickjacking（点击劫持
+）等形式。
+<p/>
+<h5 id="测试过程-10">12.1 测试过程</h5>
+<p>查看high级别对应high.js源码，发现是经过混淆后的代码：</p>
+<figure>
+<img src="12.1.png" srcset="/img/loading.gif" lazyload alt="源码" />
+<figcaption aria-hidden="true">源码</figcaption>
+</figure>
+<p style="text-align: justify;">
+使用JS解密网站<code>http://deobfuscatejavascript.com/#</code>，查看生成<code>token</code>的相关代码：
+<p/>
+<figure>
+<img src="12.2.png" srcset="/img/loading.gif" lazyload alt="解码后的源码" />
+<figcaption aria-hidden="true">解码后的源码</figcaption>
+</figure>
+<p>分析得知，生成 token 的步骤是：</p>
+<ul>
+<li>执行 <code>token_part_1("ABCD", 44)</code>；</li>
+<li>执行<code>token_part_2("XX")</code>；</li>
+<li>点击按钮的时候执行 <code>token_part_3</code>。</li>
+</ul>
+<p style="text-align: justify;">
+修改部分代码（其余部分不动），带入<code>success</code>执行生成<code>token</code>(找个网站执行修改后的js代码):
+<p/>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">function</span> <span class="hljs-title">token_part_3</span>(t, y = &quot;ZZ&quot;) &#123;<br>    token = sha256(token+ y)<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">token</span><br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title">token_part_2</span>(e = &quot;YY&quot;) &#123;<br>    token = sha256(e + token)<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">token</span><br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title">token_part_1</span>(a, b) &#123;<br>    token = do_something(&quot;success&quot;)<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">token</span><br>&#125;<br><br>token_part_1(<span class="hljs-string">&quot;ABCD&quot;</span>, <span class="hljs-number">44</span>);<br>token_part_2(<span class="hljs-string">&quot;XX&quot;</span>);<br>x = token_part_3(y = <span class="hljs-string">&quot;ZZ&quot;</span>);<br>console.log(x);<br></code></pre></td></tr></table></figure>
+<figure>
+<img src="12.3.png" srcset="/img/loading.gif" lazyload alt="运行后输出token" />
+<figcaption aria-hidden="true">运行后输出token</figcaption>
+</figure>
+<p style="text-align: justify;">
+在原页面点击<code>submit</code>，使用Burp抓包，修改其中的<code>token</code>和<code>phrase</code>。抓包如下：
+<p/>
+<figure>
+<img src="12.4.png" srcset="/img/loading.gif" lazyload alt="抓包结果" />
+<figcaption aria-hidden="true">抓包结果</figcaption>
+</figure>
+<p>修改字段后：</p>
+<figure>
+<img src="12.5.png" srcset="/img/loading.gif" lazyload alt="修改字段" />
+<figcaption aria-hidden="true">修改字段</figcaption>
+</figure>
+<p>放行修改后的数据包，Burp渲染返回结果如下：</p>
+<figure>
+<img src="12.6.png" srcset="/img/loading.gif" lazyload alt="Well Done !" />
+<figcaption aria-hidden="true">Well Done !</figcaption>
+</figure>
+<h5 id="修复建议-11">12.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+输入验证和输出编码：确保所有用户输入都经过严格验证，输出时进行适当编码；
+<p/></li>
+<li><p style="text-align: justify;">
+内容安全策略 (CSP)：使用CSP头限制哪些脚本可以执行；
+<p/></li>
+<li><p style="text-align: justify;">
+HttpOnly和Secure标志：在cookies上设置HttpOnly和Secure标志，防止JavaScript访问敏感数据；
+<p/></li>
+</ul>
+<h4 id="authorisation-bypass-未授权访问">13. Authorisation Bypass
+（未授权访问）</h4>
+<p style="text-align: justify;">
+授权绕过（Authorisation
+Bypass）是一种严重的安全漏洞，攻击者通过利用系统的漏洞或错误配置，绕过正常的访问控制机制，获得未经授权的访问权限。这种漏洞可能导致敏感信息泄露、数据篡改、系统破坏等严重后果。
+<p/>
+<h5 id="测试过程-11">13.1 测试过程</h5>
+<p style="text-align: justify;">
+管理员<code>admin</code>用户可直接访问<code>authbypass</code>页面及相关资源，攻击目标：使用其他用户<code>gordonb / abc123</code>访问或修改相关资源。
+<p/>
+<figure>
+<img src="13.1.png" srcset="/img/loading.gif" lazyload alt="admin用户访问" />
+<figcaption aria-hidden="true">admin用户访问</figcaption>
+</figure>
+<p>切换到指定普通用户：</p>
+<figure>
+<img src="13.2.png" srcset="/img/loading.gif" lazyload alt="切换到普通用户" />
+<figcaption aria-hidden="true">切换到普通用户</figcaption>
+</figure>
+<p>尝试访问用户数据表，返回错误报告，提示无权限，具体如下：</p>
+<figure>
+<img src="13.3.png" srcset="/img/loading.gif" lazyload alt="普通用户访问失败" />
+<figcaption aria-hidden="true">普通用户访问失败</figcaption>
+</figure>
+<p>观察更用户数据操作，发现其使用的post方法：</p>
+<figure>
+<img src="13.4.png" srcset="/img/loading.gif" lazyload alt="观察访问的请求操作" />
+<figcaption aria-hidden="true">观察访问的请求操作</figcaption>
+</figure>
+<p>尝试伪造post数据包，非授权修改用户数据。原用户信息：</p>
+<p><code>&#123;"id":5,"first_name":"Bob","surname":"Smith"&#125;</code></p>
+<p>修改后，返回成功：</p>
+<figure>
+<img src="13.5.png" srcset="/img/loading.gif" lazyload alt="非授权修改用户信息" />
+<figcaption aria-hidden="true">非授权修改用户信息</figcaption>
+</figure>
+<p>再次登录查看信息已经变更：</p>
+<figure>
+<img src="13.6.png" srcset="/img/loading.gif" lazyload alt="信息已变更" />
+<figcaption aria-hidden="true">信息已变更</figcaption>
+</figure>
+<h5 id="修复建议-12">13.2 修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+严格的访问控制检查：对所有请求进行严格的权限验证，确保每个请求都经过权限检查。使用统一的访问控制机制，避免遗漏。
+<p/></li>
+<li><p style="text-align: justify;">
+最小权限原则（Principle of Least
+Privilege）：只授予用户完成任务所需的最低权限，避免过度授权；
+<p/></li>
+<li><p style="text-align: justify;">
+参数验证和加密：对 URL
+参数和请求参数进行严格验证，防止篡改。使用加密或哈希技术保护敏感参数。
+<p/></li>
+</ul>
+<h4 id="open-http-redirect重定向攻击">14. Open HTTP
+Redirect（重定向攻击）</h4>
+<p style="text-align: justify;">
+HTTP 重定向攻击（HTTP Redirect Attack）是一种网络攻击，利用 HTTP
+协议中的重定向机制，将用户引导至恶意网站或非法页面，进而进行钓鱼、恶意软件传播等恶意行为。攻击者通常通过操控重定向响应头或
+URL 参数实现这种攻击。
+<p/>
+<h5 id="测试过程-12">测试过程</h5>
+<p>修改页面代码，构造恶意跳转：</p>
+<p><code>payload</code>如下：</p>
+<p><code>?redirect=https://www.baidu.com?6=info.php</code></p>
+<figure>
+<img src="14.1.png" srcset="/img/loading.gif" lazyload alt="修改payload" />
+<figcaption aria-hidden="true">修改payload</figcaption>
+</figure>
+<p>点击链接，成功跳转：</p>
+<figure>
+<img src="14.2.png" srcset="/img/loading.gif" lazyload alt="成功跳转" />
+<figcaption aria-hidden="true">成功跳转</figcaption>
+</figure>
+<h5 id="修复建议-13">修复建议</h5>
+<ul>
+<li><p style="text-align: justify;">
+验证重定向目标：在实现重定向时，确保目标URL是合法和可信的。避免直接使用用户输入的URL进行重定向；
+<p/></li>
+<li><p style="text-align: justify;">
+使用安全的重定向方法：使用相对路径或白名单验证重定向目标，而不是直接接受和使用用户提供的URL；
+<p/></li>
+<li><p style="text-align: justify;">
+实施内容安全策略（Content Security Policy,
+CSP）：使用CSP头限制网页可以加载的资源，防止加载来自不可信来源的内容。
+<p/></li>
+</ul>
+<h3 id="小芝士">小芝士</h3>
+<p>终端中命令的执行逻辑：</p>
+<ul>
+<li><p>Windows中：</p>
+<ul>
+<li><p style="text-align: justify;">
+"|":直接执行后面的语句。例如: <code>ping 127.0.0.1|whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"||":如果前面执行的语句执行出错，则执行后面的语句，前面的语句只能为假。例如:
+<code>ping 2|whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"&amp;":
+如果前面的语句为假则直接执行后面的语句，前面的语句可真可假。例如:
+<code>ping 127.0.0.1&amp;whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"&amp;&amp;":如果前面的语句为假则直接出错，也不执行后面的语句，前面的语句只能为真。例如:
+<code>ping 127.0.0.1&amp;&amp;whoami</code>.
+<p/></li>
+</ul></li>
+<li><p>Linux中：</p>
+<ul>
+<li><p style="text-align: justify;">
+";":执行完前面的语句再执行后面的。例如:
+<code>ping 127.0.0.1;whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"|"：显示后面语句的执行结果。例如: <code>ping 127.0.0.1|whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"||"：当前面的语句执行出错时，执行后面的语句。例如:
+<code>ping 1||whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"&amp;"
+:如果前面的语句为假则直接执行后面的语句，前面的语句可真可假。例如:
+<code>ping 127.0.0.1&amp;whoami</code>.
+<p/></li>
+<li><p style="text-align: justify;">
+"&amp;&amp;"
+:如果前面的语句为假则直接出错，也不执行后面的，前面的语句只能为真。例如:
+<code>ping 127.0.0.1&amp;&amp;whoami</code>.
+<p/></li>
+</ul></li>
+</ul>
+<h3 id="参考链接">参考链接</h3>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/ymk08"
+class="uri">http://t.csdnimg.cn/ymk08</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/HdS64"
+class="uri">http://t.csdnimg.cn/HdS64</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ranzhong/p/18033320"
+class="uri">https://www.cnblogs.com/ranzhong/p/18033320</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:4"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/eDx0C"
+class="uri">http://t.csdnimg.cn/eDx0C</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:5"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/CHfO3"
+class="uri">http://t.csdnimg.cn/CHfO3</a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:6"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/JqHfM"
+class="uri">http://t.csdnimg.cn/JqHfM</a>
+<a href="#fnref:6" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:7"
+class="footnote-text"><span>弱口令字典下载地址：<a target="_blank" rel="noopener" href="https://weakpass.com/"
+class="uri">https://weakpass.com/</a>
+<a href="#fnref:7" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Notes/" class="category-chain-item">Notes</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Notes/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/" class="category-chain-item">网络攻防技术</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="print-no-link">#-[网络攻防技术，学习笔记]</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>DVWA靶场</div>
+      <div>https://ljxkkk0.github.io/Notes/网络攻防技术/DVWA靶场/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ljx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E5%8C%96/" title="初始化">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">初始化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Hexo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" title="常用指令">
+                        <span class="hidden-mobile">常用指令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Powered By Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Decorated With Fluid</span></a> <br><i class="iconfont icon-copyright"></i><span> 2024 </span> <a href="https://ljxkkk0.github.io/" target="_self" rel="nofollow noopener"><span>Jason</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
